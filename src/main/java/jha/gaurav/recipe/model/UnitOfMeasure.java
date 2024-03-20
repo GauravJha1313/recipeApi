@@ -2,6 +2,8 @@ package jha.gaurav.recipe.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,7 +12,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class UnitOfMeasure {
     @Id
@@ -26,4 +29,14 @@ public class UnitOfMeasure {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @Override
+    public String toString() {
+        return "UnitOfMeasure{" +
+                "id=" + id +
+                ", unit='" + unit + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }

@@ -1,13 +1,10 @@
 package jha.gaurav.recipe.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jha.gaurav.recipe.enums.Difficulty;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -54,10 +51,9 @@ public class Recipe {
         }
     }
 
-    public Recipe addIngredient(IngredientWithMeasurement ingredientWithMeasurement){
+    public void addIngredient(IngredientWithMeasurement ingredientWithMeasurement){
         ingredientWithMeasurement.setRecipe(this);
         this.ingredients.add(ingredientWithMeasurement);
-        return this;
     }
 
     @CreationTimestamp

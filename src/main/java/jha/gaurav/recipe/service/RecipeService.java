@@ -19,7 +19,6 @@ public class RecipeService {
     private final UnitOfMeasureRepository unitOfMeasureRepository;
     private final CategoryRepository categoryRepository;
     public Recipe addRecipe(Recipe recipe){
-        Set<IngredientWithMeasurement> ingredients = new HashSet<>();
         for (IngredientWithMeasurement ingredientWithMeasurement : recipe.getIngredients()) {
             Ingredient ingredient = ingredientRepository.findByName(ingredientWithMeasurement.getIngredient().getName())
                     .orElseGet(() -> {
@@ -35,9 +34,8 @@ public class RecipeService {
                         return unitOfMeasureRepository.save(newUnitOfMeasure);
                     });
             ingredientWithMeasurement.setUnitOfMeasure(unitOfMeasure);
-            ingredients.add(ingredientWithMeasurementRepository.save(ingredientWithMeasurement));
+            recipe.addIngredient(ingredientWithMeasurement);
         }
-        recipe.setIngredients(ingredients);
         Set<Category> categories = new HashSet<>();
         for (Category category : recipe.getCategories()) {
             Category c = categoryRepository.findByName(category.getName())
